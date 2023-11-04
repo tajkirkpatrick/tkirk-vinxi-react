@@ -9,9 +9,16 @@ export default createApp({
       dir: "./public",
     },
     {
+      name: "trpc",
+      mode: "handler",
+      handler: "./server/trpc/handler.ts",
+      base: "/api/trpc",
+      target: "server",
+    },
+    {
       name: "client",
       mode: "spa",
-      handler: "./index.ts",
+      handler: "./client.ts",
       target: "browser",
       plugins: () => [reactRefresh()],
     },
