@@ -25,7 +25,7 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 
 export const appRouter = router({
-  sayHello: publicProcedure.query(() => ({ date: new Date() })),
+  sayHello: publicProcedure.query(() => ({ hello: "world" })),
 });
 
 // Export type router type signature,
