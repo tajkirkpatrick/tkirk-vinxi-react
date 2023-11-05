@@ -8,11 +8,11 @@ import Home from "./home";
 import {
   Outlet,
   RouterProvider,
-  Link,
   Router,
   Route,
   RootRoute,
 } from "@tanstack/react-router";
+import NavBar from "./components/navbar";
 
 // Render the devtools in development
 const TanStackRouterDevtools =
@@ -24,7 +24,7 @@ const TanStackRouterDevtools =
           default: res.TanStackRouterDevtools,
           // For Embedded Mode
           // default: res.TanStackRouterDevtoolsPanel
-        }))
+        })),
       );
 
 // Create a root route
@@ -32,10 +32,8 @@ const rootRoute = new RootRoute({
   component: () => {
     return (
       <>
-        <div className="flex flex-row space-x-4">
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </div>
+        <NavBar />
+
         <Outlet />
         <TanStackRouterDevtools initialIsOpen={true} />
       </>
@@ -47,13 +45,7 @@ const rootRoute = new RootRoute({
 const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: () => {
-    return (
-      <div>
-        <h1>Hello From Index Route</h1>
-      </div>
-    );
-  },
+  component: Home,
 });
 
 const aboutRoute = new Route({
@@ -86,18 +78,16 @@ function App() {
           url: "http://localhost:3000/api/trpc",
         }),
       ],
-    })
+    }),
   );
 
   return (
-    <StrictMode>
-      <trpc.Provider client={trpcClient} queryClient={queryClient}>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </trpc.Provider>
-    </StrictMode>
+    <trpc.Provider client={trpcClient} queryClient={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </trpc.Provider>
   );
 }
 
