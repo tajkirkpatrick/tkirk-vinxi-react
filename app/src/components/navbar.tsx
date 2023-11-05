@@ -1,12 +1,17 @@
 import react from "react";
 import { Link } from "@tanstack/react-router";
+import { Button } from "../components/ui/button";
 
 function NavBar() {
   return (
-    <nav className="min-w-screen h-[48px] bg-black text-white">
-      <ul className=" flex h-full flex-row items-center justify-center space-x-2">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
+    <nav className="min-w-screen flex h-[48px] items-center justify-between border-b-[1px] border-black px-4 text-black shadow-md">
+      <Link to="/" className="text-2xl">
+        Home
+      </Link>
+      <ul className="flex h-full items-center justify-center space-x-4">
+        <Link to="/about">
+          <Button>About</Button>
+        </Link>
       </ul>
     </nav>
   );

@@ -9,14 +9,8 @@ export function Home() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="p-4">
-      <Button
-        onClick={() => {
-          console.log(data.hello);
-        }}
-      >
-        Button
-      </Button>
+    <div>
+      <h3>Home Route</h3>
     </div>
   );
 }

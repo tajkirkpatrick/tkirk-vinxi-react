@@ -33,9 +33,10 @@ const rootRoute = new RootRoute({
     return (
       <>
         <NavBar />
-
-        <Outlet />
-        <TanStackRouterDevtools initialIsOpen={true} />
+        <main className="flex items-center justify-center">
+          <Outlet />
+        </main>
+        <TanStackRouterDevtools initialIsOpen={false} />
       </>
     );
   },
@@ -54,7 +55,7 @@ const aboutRoute = new Route({
   component: () => {
     return (
       <div>
-        <h1>Hello From About Route</h1>
+        <h1>About Route</h1>
       </div>
     );
   },
