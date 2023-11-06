@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createTRPCReact, httpBatchLink } from "@trpc/react-query";
-import { useState, StrictMode, lazy } from "react";
+import { useState, StrictMode, lazy, Suspense } from "react";
 import superjson from "superjson";
 import type { AppRouter } from "../../server/trpc/router";
 import Home from "./home";
@@ -61,8 +61,24 @@ const aboutRoute = new Route({
   },
 });
 
+const catchAllRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: "*",
+  component: () => {
+    return (
+      <div>
+        <h1>404 | Page Not Found</h1>
+      </div>
+    );
+  },
+});
+
 // Create the route tree using your routes
-const routeTree = rootRoute.addChildren([indexRoute, aboutRoute]);
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  aboutRoute,
+  catchAllRoute,
+]);
 
 // Create the router using your route tree
 const router = new Router({ routeTree });
@@ -83,12 +99,16 @@ function App() {
   );
 
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </trpc.Provider>
+    <StrictMode>
+      <Suspense fallback={<div>Loading...</div>}>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </trpc.Provider>
+      </Suspense>
+    </StrictMode>
   );
 }
 
