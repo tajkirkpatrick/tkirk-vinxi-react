@@ -33,7 +33,7 @@ const rootRoute = new RootRoute({
     return (
       <>
         <NavBar />
-        <main className="flex items-center justify-center">
+        <main className="flex min-h-[90vh] items-center justify-center">
           <Outlet />
         </main>
         <TanStackRouterDevtools initialIsOpen={false} />

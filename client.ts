@@ -22,6 +22,6 @@ export default eventHandler(() => {
       headers: {
         "Content-Type": "text/html",
       },
-    }
+    },
   );
 });
