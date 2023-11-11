@@ -9,8 +9,10 @@ export function Home() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <div className="text-center">
       <h3>Home Route</h3>
+      <p>{data.text}</p>
+      <p>Date: {data.date}</p>
     </div>
   );
 }

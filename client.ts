@@ -9,7 +9,7 @@ export default eventHandler(() => {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>React SPA</title>
-        <link rel="icon" href="/public/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
         <div id="app"></div>
@@ -22,6 +22,6 @@ export default eventHandler(() => {
       headers: {
         "Content-Type": "text/html",
       },
-    }
+    },
   );
 });

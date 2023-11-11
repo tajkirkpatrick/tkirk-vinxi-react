@@ -25,7 +25,10 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 
 export const appRouter = router({
-  sayHello: publicProcedure.query(() => ({ hello: "world" })),
+  sayHello: publicProcedure.query(() => ({
+    text: "Hello World from tRPC!",
+    date: new Date().toLocaleDateString("en-US"),
+  })),
 });
 
 // Export type router type signature,

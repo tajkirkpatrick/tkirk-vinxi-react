@@ -13,6 +13,7 @@ import {
   RootRoute,
 } from "@tanstack/react-router";
 import NavBar from "./components/navbar";
+import About from "./about";
 
 // Render the devtools in development
 const TanStackRouterDevtools =
@@ -52,13 +53,7 @@ const indexRoute = new Route({
 const aboutRoute = new Route({
   getParentRoute: () => rootRoute,
   path: "/about",
-  component: () => {
-    return (
-      <div>
-        <h1>About Route</h1>
-      </div>
-    );
-  },
+  component: About,
 });
 
 // Create the route tree using your routes
@@ -83,12 +78,14 @@ function App() {
   );
 
   return (
-    <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </trpc.Provider>
+    <StrictMode>
+      <trpc.Provider client={trpcClient} queryClient={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </trpc.Provider>
+    </StrictMode>
   );
 }
 
