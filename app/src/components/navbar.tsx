@@ -5,7 +5,7 @@ import { trpc } from "../app";
 
 function NavBar() {
   return (
-    <nav className="min-w-screen flex h-[48px] items-center justify-between border-b-[1px] border-black px-4 text-black shadow-md">
+    <nav className="min-w-screen flex min-h-[10vh] items-center justify-between border-b-[1px] border-black px-4 text-black shadow-md">
       <Link to="/" className="text-2xl">
         <svg
           id="logo-88"
