@@ -14,6 +14,7 @@ import {
 } from "@tanstack/react-router";
 import NavBar from "./components/navbar";
 import About from "./about";
+import { ThemeProvider } from "./components/theme-provider";
 
 // Render the devtools in development
 const TanStackRouterDevtools =
@@ -34,7 +35,7 @@ const rootRoute = new RootRoute({
     return (
       <>
         <NavBar />
-        <main className="flex min-h-[90vh] items-center justify-center">
+        <main className="flex min-h-[90vh] items-center justify-center bg-[#FEE4DC] dark:bg-[#230901]">
           <Outlet />
         </main>
         <TanStackRouterDevtools initialIsOpen={false} />
@@ -95,14 +96,16 @@ function App() {
 
   return (
     <StrictMode>
-      <Suspense fallback={<div>Loading...</div>}>
-        <trpc.Provider client={trpcClient} queryClient={queryClient}>
-          <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </trpc.Provider>
-      </Suspense>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Suspense fallback={<div>Loading...</div>}>
+          <trpc.Provider client={trpcClient} queryClient={queryClient}>
+            <QueryClientProvider client={queryClient}>
+              <RouterProvider router={router} />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </trpc.Provider>
+        </Suspense>
+      </ThemeProvider>
     </StrictMode>
   );
 }
